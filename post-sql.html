@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond 3NF | Cyusa Alain</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="post-page">
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">Cyusa Alain</div>
+            <ul class="menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="#" class="active">Blog</a></li>
+                <li><a href="journey.html">Journey</a></li>
+                <li><a href="support.html" class="support-btn">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container post-container">
+        <a href="blog.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to all posts
+        </a>
+
+        <article class="post-content">
+            <span class="post-category" style="color: #8B8888;">SQL</span>
+            <h1 class="post-main-title">Beyond 3NF: Optimizing Clinic Databases</h1>
+            <div class="post-meta">7 min read • March 2026</div>
+
+            <p class="post-intro">
+                Designing a database schema for a clinic booking system requires careful attention to normalization, performance, and complex relationships. This post explores how I went beyond Third Normal Form (3NF) to optimize for real-world query patterns.
+            </p>
+
+            <h2 class="post-section-title white-text">Database Schema</h2>
+
+            <div class="code-block-wrapper">
+                <div class="code-header">SQL</div>
+                <pre class="code-box">
+<code>-- Core tables with optimized relationships
+CREATE TABLE doctors (
+    doctor_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    specialization VARCHAR(100),
+    license_number VARCHAR(50) UNIQUE,
+    years_of_experience INT,
+    consultation_fee DECIMAL(10, 2),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    INDEX idx_specialization (specialization)
+);
+
+CREATE TABLE patients (
+    patient_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    date_of_birth DATE,
+    blood_group VARCHAR(5),
+    allergies TEXT,
+    medical_history TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE appointments (
+    appointment_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_id INT NOT NULL,
+    doctor_id INT NOT NULL,
+    appointment_date DATETIME NOT NULL,
+    status ENUM('scheduled', 'completed', 'cancelled') DEFAULT 'scheduled',
+    symptoms TEXT,
+    diagnosis TEXT,
+    prescription TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id),
+    INDEX idx_appointment_date (appointment_date),
+    INDEX idx_status (status),
+    INDEX idx_doctor_date (doctor_id, appointment_date)
+);</code></pre>
+            </div>
+
+            <h2 class="post-section-title">Optimization Strategies</h2>
+            <p>The schema includes several performance optimizations to handle high-concurrency booking environments:</p>
+            <ul class="post-list">
+                <li><strong>Composite indexes</strong> on frequently queried columns (doctor_id + appointment_date) to speed up availability checks.</li>
+                <li>Proper use of <strong>ENUM types</strong> for status fields to ensure data integrity and reduce storage overhead.</li>
+                <li><strong>Normalized user authentication</strong> separated from domain-specific data for better security and scalability.</li>
+                <li>Strategic <strong>denormalization</strong> of consultation fees to ensure historical financial accuracy even if a doctor changes their rates.</li>
+            </ul>
+        </article>
+    </main>
+
+</body>
+</html>

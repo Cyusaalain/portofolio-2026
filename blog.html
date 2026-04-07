@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Cyusa Alain</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="blog-page">
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">Cyusa Alain</div>
+            <input type="checkbox" id="nav-check" class="nav-toggler">
+            <label for="nav-check" class="hamburger">
+              <i class="fas fa-bars"></i>
+            </label>
+            <ul class="menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="#" class="active">Blog</a></li>
+                <li><a href="journey.html">Journey</a></li>
+                <li><a href="support.html" class="support-btn">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="blog-hero">
+            <h1 class="blog-title">Technical Writing & Insights</h1>
+            <p class="blog-subtitle">Exploring Full Stack development, Flutter architecture, and Database optimization.</p>
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="flutter">Flutter</button>
+            <button class="filter-btn" data-filter="sql">SQL</button>
+            <button class="filter-btn" data-filter="devops">Devops</button>
+        </div>
+
+        <div class="blog-list">
+            
+            <a href="post-flutter.html" class="blog-card" data-category="flutter">
+                <div class="blog-icon-box">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="blog-content">
+                    <span class="category-tag">Flutter</span>
+                    <h2>Architecting Real-Time Habit Trackers</h2>
+                    <p>A deep dive into using Firestore listeners and Firebase Auth to build the Lifestyle App with real-time synchronization and offline support.</p>
+                </div>
+            </a>
+
+            <a href="post-sql.html" class="blog-card" data-category="sql">
+                <div class="blog-icon-box">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="blog-content">
+                    <span class="category-tag">SQL</span>
+                    <h2>Beyond 3NF: Optimizing Clinic Databases</h2>
+                    <p>How I designed the relational schema for the Clinic Booking System to handle complex doctor-patient links with optimal query performance.</p>
+                </div>
+            </a>
+
+            <a href="post-devops.html" class="blog-card" data-category="devops">
+                <div class="blog-icon-box">
+                    <i class="fas fa-server"></i>
+                </div>
+                <div class="blog-content">
+                    <span class="category-tag">Devops</span>
+                    <h2>Zero-Downtime Deployment on Linux</h2>
+                    <p>Lessons learned from SCOTEC LTD on configuring enterprise servers, implementing CI/CD pipelines, and minimizing system bugs.</p>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <script src="blog-filter.js"></script>
+</body>
+</html>

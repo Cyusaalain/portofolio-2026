@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & Contact | Cyusa Alain</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="support-page">
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">Cyusa Alain</div>
+            <ul class="menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="journey.html">Journey</a></li>
+                <li><a href="#" class="active">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container support-layout">
+        <section class="contact-form-section">
+            <h1 class="support-title">Get in Touch</h1>
+            <p class="support-intro">Have a project in mind? Fill out the form below and I'll get back to you as soon as possible.</p>
+            
+            <form 
+                class="support-form" 
+                id="contactForm" 
+                action="https://formspree.io/f/xwvwywvn" 
+                method="POST"
+            >
+                <input type="text" id="userName" name="Full Name" placeholder="Your full name" class="form-input" required>
+                
+                <input type="email" id="userEmail" name="Email Address" placeholder="email@example.com" class="form-input" style="border: 1px solid #F6C2C2;" required>
+                
+                <textarea id="userMessage" name="Project Details" placeholder="Tell me about your project or opportunity" class="form-input textarea" style="border: 1px solid #F8EBEB;" required></textarea>
+                
+                <button type="submit" id="submitBtn" class="submit-btn" disabled>
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </section>
+
+        <section class="direct-contact-section">
+            <h2 class="support-subtitle">Direct Connectivity & Socials</h2>
+            <p class="support-intro">Prefer to reach out directly? Here are other ways to connect with me.</p>
+
+            <div class="contact-info-list">
+                <div class="contact-item">
+                    <div class="support-icon-box"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-text">umuhirecyusaa@gmail.com</div>
+                </div>
+                <div class="contact-item">
+                    <div class="support-icon-box"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contact-text underline">+250 780 665 671</div>
+                </div>
+                <div class="contact-item">
+                    <div class="support-icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-text">Kigali, Rwanda (KN 418 ST)</div>
+                </div>
+            </div>
+
+            <hr class="support-divider">
+
+            <h3 class="social-header">Connect on Social Media</h3>
+            <div class="social-grid">
+                <a href="https://www.instagram.com/wizzy_alain" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/cyusa_umuhire" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/in/cyusa-alain-9400772a5" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </section>
+    </main>
+    <div id="toast" class="toast">Message Sent! I'll get back to you soon.</div>
+
+    <script src="support-logic.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero-Downtime Deployment | Cyusa Alain</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="post-page">
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">Cyusa Alain</div>
+            <ul class="menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="#" class="active">Blog</a></li>
+                <li><a href="journey.html">Journey</a></li>
+                <li><a href="support.html" class="support-btn">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container post-container">
+        <a href="blog.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to all posts
+        </a>
+
+        <article class="post-content">
+            <span class="post-category" style="color: #8B8888;">DevOps</span>
+            <h1 class="post-main-title">Zero-Downtime Deployment on Linux</h1>
+            <div class="post-meta">6 min read • February 2026</div>
+
+            <p class="post-intro">
+                At SCOTEC LTD, I learned valuable lessons about deploying enterprise applications on Linux servers while maintaining 99.9% uptime. This post covers the strategies and tools that enable zero-downtime deployments.
+            </p>
+
+            <h2 class="post-section-title white-text">Deployment Pipeline</h2>
+
+            <div class="code-block-wrapper terminal-style">
+                <div class="code-header">Bash Script</div>
+                <pre class="code-box">
+<code>#!/bin/bash
+# Zero-downtime deployment script
+
+# Pull latest changes
+git fetch origin
+git checkout main
+git pull origin main
+
+# Install dependencies
+npm ci --production
+
+# Run database migrations
+npm run migrate
+
+# Build application
+npm run build
+
+# Health check before switching
+curl -f http://localhost:3000/health || exit 1
+
+# Reload application with PM2 (zero-downtime)
+pm2 reload app-name --update-env
+
+# Wait for new instances to be healthy
+sleep 5
+
+# Verify deployment
+curl -f http://localhost:3000/health
+
+echo "Deployment completed successfully"</code></pre>
+            </div>
+
+            <h2 class="post-section-title">Key Practices</h2>
+            <ul class="post-list">
+                <li><strong>Use PM2 cluster mode</strong> for graceful reloads without dropping requests.</li>
+                <li><strong>Implement health check endpoints</strong> to ensure the app is ready before routing traffic.</li>
+                <li><strong>Run database migrations</strong> before application restart to prevent schema mismatches.</li>
+                <li><strong>Maintain rollback scripts</strong> to revert to the previous stable version instantly.</li>
+                <li><strong>Monitor error rates</strong> immediately after deployment using real-time logging.</li>
+            </ul>
+
+            <h2 class="post-section-title">Lessons Learned</h2>
+            <p>
+                The most important lesson was to always have a <strong>rollback plan</strong>. Even with comprehensive testing, production environments can surprise you. Automated health checks and gradual rollouts are essential for maintaining system reliability and user trust.
+            </p>
+        </article>
+    </main>
+
+</body>
+</html>

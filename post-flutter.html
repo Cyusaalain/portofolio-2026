@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post | Cyusa Alain</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="post-page">
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">Cyusa Alain</div>
+            <ul class="menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="#" class="active">Blog</a></li>
+                <li><a href="journey.html">Journey</a></li>
+                <li><a href="support.html" class="support-btn">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container post-container">
+        <a href="blog.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to all posts
+        </a>
+
+        <article class="post-content">
+            <span class="post-category">Flutter</span>
+            <h1 class="post-main-title">Architecting Real-Time Habit Trackers</h1>
+            <div class="post-meta">5 min read • April 2026</div>
+
+            <p class="post-intro">
+                Building real-time applications requires careful consideration of data synchronization, authentication, and state management. In this deep dive, I explore how I architected the Lifestyle App using Flutter, Firebase Auth, and Firestore listeners to create a seamless habit tracking experience.
+            </p>
+
+            <h2 class="post-section-title">The Challenge</h2>
+            <p>The main challenge was ensuring that habit updates appeared instantly across all user devices while maintaining data consistency and handling offline scenarios gracefully.</p>
+
+            <h2 class="post-section-title white-text">Architecture Overview</h2>
+
+            <div class="code-block-wrapper">
+                <div class="code-header">Dart</div>
+                <pre class="code-box">
+<code>// Real-time Firestore listener implementation
+StreamBuilder&lt;QuerySnapshot&gt;(
+  stream: FirebaseFirestore.instance
+    .collection('habits')
+    .where('userId', isEqualTo: currentUser.uid)
+    .orderBy('createdAt', descending: true)
+    .snapshots(),
+  builder: (context, snapshot) {
+    if (snapshot.hasError) {
+      return ErrorWidget(error: snapshot.error);
+    }
+    
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return LoadingIndicator();
+    }
+
+    final habits = snapshot.data!.docs.map((doc) => 
+      Habit.fromFirestore(doc)
+    ).toList();
+
+    return HabitListView(habits: habits);
+  },
+)</code></pre>
+            </div>
+        </article>
+    </main>
+
+</body>
+</html>
