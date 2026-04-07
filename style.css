@@ -445,74 +445,58 @@ body {
 .hamburger {
     display: none; /* Hidden on desktop */
 }
-/* --- DESKTOP: Hide the mobile elements by default --- */
-#nav-check, .nav-toggler {
+/* --- Desktop: Hide the menu button --- */
+.nav-toggler {
     display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
 }
 
-/* --- MOBILE UPGRADES (max-width: 768px) --- */
+/* --- Desktop: Hide the mobile button by default --- */
+.nav-toggler {
+    display: none;
+    background: none;
+    border: none;
+    color: white; /* Ensure icon is white */
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* --- Mobile View Upgrade (768px and below) --- */
 @media (max-width: 768px) {
-    
-    /* Show the hamburger icon */
     .nav-toggler {
-        display: block;
-        color: #FFFFFF; /* Makes icon white */
-        font-size: 28px;
-        cursor: pointer;
+        display: block; /* Show the bars icon */
     }
 
-    /* Transform the menu into a vertical dropdown */
     .menu {
-        display: none; /* Hidden until toggled */
+        display: none; /* JavaScript will toggle this to 'flex' */
         position: absolute;
-        top: 80px; /* Position right below navbar */
+        top: 80px; /* Adjust based on your navbar height */
         left: 0;
         width: 100%;
-        background: #272727; /* Matches your bg-color */
+        background-color: var(--bg-color);
         flex-direction: column;
         padding: 20px 0;
         border-bottom: 1px solid #4D4D4D;
-        z-index: 999;
+        z-index: 1000;
+    }
+
+    /* This class is toggled by JavaScript */
+    .menu.active {
+        display: flex;
     }
 
     .menu li {
         width: 100%;
         text-align: center;
-        margin: 10px 0;
+        margin: 15px 0;
     }
 
-    /* DROPDOWN LOGIC: Show menu when icon is clicked */
-    #nav-check:checked ~ .menu {
-        display: flex;
-    }
-
-    /* --- Upgrade 2: Service Cards Layout --- */
-    .what-i-do-flex-container {
-        flex-direction: column; /* Stacks "What I do" title above cards */
-        text-align: center;
-        gap: 30px;
-    }
-
-    .services-viewport {
-        width: 100%;
-        overflow: visible; /* Makes all 3 cards visible */
-    }
-
-    .services-grid {
-        flex-direction: column; /* Cards go vertical */
-        align-items: center;
-        width: 100%;
-        transform: none !important; /* Disables the JS sliding on mobile */
-    }
-
-    .service-card {
-        width: 100%;
-        max-width: 320px; /* Keeps cards centered and neat */
-        margin-bottom: 20px;
-    }
-
-    .scroll-arrow {
-        display: none; /* Hide arrow on mobile as all cards show */
+    .menu a {
+        font-size: 20px;
     }
 }
 /* Blog Page Specifics */
